@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  email      String   @unique
+  password   String
+  role       Role     @default(STUDENT)
+  recipes    Recipe[]
+}
+
+enum Role {
+  STUDENT
+  VENDOR
+  ADMIN
+}
+
+model Recipe {
+  id             Int               @id @default(autoincrement())
+  title          String
+  description    String
+  imageURL       String
+  ingredients    Ingredient[]
+  instructions   String
+  categories     RecipeCategory[]  // Changed to relation table
+  appliances     RecipeAppliance[] // Changed to relation table
+  email          String            // Changed from userID/owner
+  user           User              @relation(fields: [email], references: [email])
+  createdAt      DateTime          @default(now())
+}
+
+
+enum Appliances {
+  RiceCooker
+  PaniniPress
+  ToasterOven    // Fixed typo from ToasterOwen
+  Toaster
+  Microwave
+  HotPlate
+}
+
+enum Category {
+  Breakfast
+  Lunch
+  Dinner
+  Vegan
+  Meat
+  Dessert
+  Chocolate
+  // Vegetarian      Not in categories yet, but should be added
+  // GlutenFree
+  // NutFree
+  // DairyFree
+}
+
+model Ingredient {
+  id        Int      @id @default(autoincrement())
+  name      String
+  quantity  String
+  recipe    Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId  Int
+}
+
+// New models for many-to-many relations
+model RecipeCategory {
+  id       Int      @id @default(autoincrement())
+  category Category
+  recipe   Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId Int
+}
+
+model RecipeAppliance {
+  id        Int        @id @default(autoincrement())
+  appliance Appliances
+  recipe    Recipe     @relation(fields: [recipeId], references: [id])
+  recipeId  Int
+}
+
+
+
+
+
+
+
+
+
+

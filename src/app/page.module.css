@@ -1,0 +1,152 @@
+/* In your CSS */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hero {
+  display: flex;
+  gap: 4rem;
+  background-color: #f0f9ff;
+  border-radius: 24px;
+  padding: 3rem;
+  margin-bottom: 4rem;
+}
+
+.heroContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tag {
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  width: fit-content;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.description {
+  color: #666;
+  line-height: 1.6;
+}
+
+.recipeInfo {
+  display: flex;
+  gap: 2rem;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.authorSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.date {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.viewButton {
+  background-color: black;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 24px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.viewButton:hover {
+  opacity: 0.9;
+}
+
+.heroImage {
+  flex: 1;
+  position: relative;
+}
+
+.mainImage {
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+.categories {
+  margin-top: 4rem;
+}
+
+.categoryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.viewAll {
+  color: #666;
+  text-decoration: none;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2rem;
+}
+
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s;
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .categoryGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .categoryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
